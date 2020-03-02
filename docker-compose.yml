@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  rd-api-php:
+    container_name: rd-api-php
+    restart: always
+    build:
+      context: .docker/php-fpm
+    volumes:
+      - ../:/var/www/
+    networks:
+      - rd-api-network
+  rd-api-nginx:
+    container_name: rd-api-nginx
+    build:
+        context: .docker/nginx
+    volumes:
+      - ./nginx/enable:/etc/nginx/conf.d
+      - ./nginx/include:/etc/nginx/include
+      - ./nginx/logs:/var/log/nginx
+      - ../:/var/www
+    networks:
+      - rd-api-network
+    ports:
+      - "8181:80"
+    depends_on:
+      - rd-api-php
+networks: 
+    rd-api-network:
+      driver: bridge

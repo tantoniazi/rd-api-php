@@ -1,0 +1,4 @@
+172.19.0.1 - - [22/Feb/2020:20:32:36 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36"
+172.19.0.1 - - [22/Feb/2020:20:32:48 +0000] "GET / HTTP/1.1" 404 1564 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36"
+172.19.0.1 - - [22/Feb/2020:20:32:50 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://192.168.0.6:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36"
+172.19.0.1 - - [22/Feb/2020:20:37:03 +0000] "GET /api/v1/sync/usuario HTTP/1.1" 500 13577 "-" "Dart/2.7 (dart:io)"
