@@ -6,7 +6,7 @@ services:
     build:
       context: .docker/php-fpm
     volumes:
-      - ../:/var/www/
+      - ./:/var/www/
     networks:
       - rd-api-network
   rd-api-nginx:
@@ -14,10 +14,10 @@ services:
     build:
         context: .docker/nginx
     volumes:
-      - ./nginx/enable:/etc/nginx/conf.d
-      - ./nginx/include:/etc/nginx/include
-      - ./nginx/logs:/var/log/nginx
-      - ../:/var/www
+      - .docker/nginx/enable:/etc/nginx/conf.d
+      - .docker/nginx/include:/etc/nginx/include
+      - .docker/nginx/logs:/var/log/nginx
+      - ./:/var/www
     networks:
       - rd-api-network
     ports:
