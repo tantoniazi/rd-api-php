@@ -9,6 +9,8 @@ use App\Repositories\BaseRepository;
 class QuoteRepository extends BaseRepository
 {
     protected $all;
+    public $min;
+
     /**
      * @var array
      */
@@ -48,42 +50,37 @@ class QuoteRepository extends BaseRepository
                 $where->ORwhere('to', $params['to']);
             }
         }) ->orderBY('price' , 'asc')->get();
-        
-        dd($this->all);
+        $route =  $this->format($params);
+
+        $array = [];
+        $total = 0;
+        foreach($route as $row){
+            $array = array_unique(array_merge(explode(",", $row['route']) , $array));
+            $total += $row['price'];
+        }
+
+        return [
+            'route' => implode(',',$array),
+            'price' => $total
+        ];
+
     }
 
-    public function format($all , $params){
+    public function format($params){
         $min = 0;
-        $response = [];
-        foreach($all as $k => $row){
-            if($row->from ==  $params['from']){
-                if($min < $row->price && $row->to == $params['to']){
-                    $min = $row->price; 
-                    $response = [
+        foreach($this->all as $k => $row){
+            if( $row->price && $row->from ==  $params['from']){
+                    $this->min += $row->price; 
+                    $response[] = [
                         'route' => $row->from . "," . $row->to,
                         'price' => $row->price 
                     ]; 
-                    continue;
-                }
-            }elseif( $row->to == $params['to']){
-                $min = $row->price; 
-               
-                foreach($all as $row2){
-                    if($row2->from ==  $row->from){
-                        if($min < $row2->price && $row2->to == $row->to){
-                            dd('x');
-                            $min = $min + $row->price ; 
-                            $response = [
-                                'route' => $row->from . "," .$row2->from . "," . $row2->to,
-                                'price' => $min
-                            ]; 
-                            return $response;
-                        }
-                }
-
-                return $response; 
+                    return $response;
+            }elseif($row->price && $row->to == $params['to']){
+                $this->min += $row->price; 
+                $response =  $this->format(['from' => $row->from , 'to' => $row->to]);
             }
         }
+        return $response;
     }
-}
 }

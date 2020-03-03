@@ -3,15 +3,13 @@
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
+
 class RouteTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    
+    public function testCreate()
     {
-        $this->assertTrue(true);
+        $response = $this->json('POST', '/route', ['from' => 'BRC' , 'to' => 'BA' , 'price' => 10]);
+        $response->assertResponseOk();
     }
 }

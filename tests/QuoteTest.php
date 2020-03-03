@@ -5,13 +5,16 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class QuoteTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+   
+    public function testGRUSCL()
     {
-        $this->assertTrue(true);
+        $json = $this->get("/quote/GRU/SCL/")->response->getContent();
+        $this->assertEquals('{"route":"GRU,BRC,SCL","price":15}' , $json);
+    }
+
+    public function testGRUBRC()
+    {
+        $json = $this->get("/quote/GRU/BRC/")->response->getContent();
+        $this->assertEquals('{"route":"GRU,BRC","price":10}' , $json);
     }
 }

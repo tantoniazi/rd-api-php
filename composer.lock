@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4f4e7a73329eb5f96d07f8297ae7bde",
+    "content-hash": "b6f69c78dd68db6e5187fb4b48cad2b7",
     "packages": [
+        {
+            "name": "albertcht/lumen-testing",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/albertcht/lumen-testing.git",
+                "reference": "64167bc0fd2ca85f0b501ed2b5976aeb75a1316a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/albertcht/lumen-testing/zipball/64167bc0fd2ca85f0b501ed2b5976aeb75a1316a",
+                "reference": "64167bc0fd2ca85f0b501ed2b5976aeb75a1316a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/lumen-framework": "~5.3|~6.0",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AlbertCht\\Lumen\\Testing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Chen",
+                    "email": "albert.cht@gmail.com"
+                }
+            ],
+            "description": "Testing Suite For Lumen like Laravel does.",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "phpunit",
+                "test",
+                "testing"
+            ],
+            "time": "2019-12-01T09:49:15+00:00"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "4.0.0",
