@@ -78,8 +78,6 @@ Abstract class BaseRepository
     public function create($input)
     {
         $model = $this->model->newInstance($input);
-        $model->usuario_id_logado = Auth::user()->id ?? null;
-        $model->nm_ip = Request::ip();
         $model->save();
 
         return $model;

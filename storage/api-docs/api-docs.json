@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PROVA RD",
+        "description": "PROVA RD",
+        "contact": {
+            "email": "tiago.antoniazi@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://api.local:8181",
+            "description": "development"
+        }
+    ],
+    "paths": {
+        "/quote/from/to/": {
+            "get": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "Buscar rota mais barata",
+                "description": "Buscar rota mais barata",
+                "operationId": "quote",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "path",
+                        "description": "origem",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "path",
+                        "description": "destino",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sucess"
+                    },
+                    "404": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/route": {
+            "post": {
+                "tags": [
+                    "route"
+                ],
+                "summary": "salvar rota nova",
+                "description": "salvar rota nova",
+                "operationId": "route",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "origem",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "destino",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "preço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sucess"
+                    },
+                    "404": {
+                        "description": "error"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -12,3 +12,4 @@
 */
 
 $router->get('quote/{from}/{to}', 'QuoteController@index');
+$router->post('route', 'QuoteController@store');
