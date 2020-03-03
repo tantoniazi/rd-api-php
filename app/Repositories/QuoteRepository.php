@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 
 class QuoteRepository extends BaseRepository
 {
+    protected $all;
     /**
      * @var array
      */
@@ -37,7 +38,7 @@ class QuoteRepository extends BaseRepository
     
     public function get($params = [])
     {
-        $all = $this->model->select(['from' , 'to' , 'price'])
+        $this->all = $this->model->select(['from' , 'to' , 'price'])
             ->where(function ($query) use ($params) {
 
             if (!empty($params['from'])){
@@ -46,12 +47,43 @@ class QuoteRepository extends BaseRepository
             if (!empty($params['to'])){
                 $where->ORwhere('to', $params['to']);
             }
-        }) ->orderBY('price' , 'asc');
-
-        return $this->format($all);
-    }
-
-    public function format($all){
+        }) ->orderBY('price' , 'asc')->get();
         
+        dd($this->all);
     }
+
+    public function format($all , $params){
+        $min = 0;
+        $response = [];
+        foreach($all as $k => $row){
+            if($row->from ==  $params['from']){
+                if($min < $row->price && $row->to == $params['to']){
+                    $min = $row->price; 
+                    $response = [
+                        'route' => $row->from . "," . $row->to,
+                        'price' => $row->price 
+                    ]; 
+                    continue;
+                }
+            }elseif( $row->to == $params['to']){
+                $min = $row->price; 
+               
+                foreach($all as $row2){
+                    if($row2->from ==  $row->from){
+                        if($min < $row2->price && $row2->to == $row->to){
+                            dd('x');
+                            $min = $min + $row->price ; 
+                            $response = [
+                                'route' => $row->from . "," .$row2->from . "," . $row2->to,
+                                'price' => $min
+                            ]; 
+                            return $response;
+                        }
+                }
+
+                return $response; 
+            }
+        }
+    }
+}
 }

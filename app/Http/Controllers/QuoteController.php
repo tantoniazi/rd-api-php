@@ -63,7 +63,7 @@ class QuoteController extends Controller
         $all =  $this->repository->get([
             'from' => $from , 
             'to' => $to
-        ])->get();
+        ]);
         return response(json_encode($all));
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage());
